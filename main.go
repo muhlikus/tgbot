@@ -1,12 +1,21 @@
 package main
 
-import "github.com/muhlikus/telegramclient"
+import (
+	"os"
+
+	"github.com/muhlikus/telegramclient"
+)
 
 func main() {
-	// Create a new TelegramClient instance
 
+	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
+	if botToken == "" {
+		panic("TELEGRAM_BOT_TOKEN environment must be set")
+	}
+
+	// Create a new TelegramClient instance
 	_, _ = telegramclient.New(
 		telegramclient.Config{
-			Token: "fake-token",
+			Token: botToken,
 		})
 }
