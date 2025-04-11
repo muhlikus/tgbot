@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-
 	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
 	if botToken == "" {
 		log.Fatalln("TELEGRAM_BOT_TOKEN environment must be set")
@@ -28,5 +27,4 @@ func main() {
 		log.Fatalf("Failed to create repository: %v", err)
 	}
 	_ = rep
-
 }

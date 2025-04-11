@@ -30,6 +30,7 @@ func (r *Repository) SendMessage(chatID int, text string) error {
 	if err != nil {
 		return fmt.Errorf("failed to send message: %w", err)
 	}
+
 	return nil
 }
 
@@ -39,5 +40,6 @@ func (r *Repository) SendDocument(chatID int, fileName string, fileBuff *bytes.B
 	if err != nil {
 		return fmt.Errorf("failed to send document: %w", err)
 	}
+
 	return nil
 }
