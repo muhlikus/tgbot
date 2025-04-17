@@ -1,30 +1,46 @@
 package main
 
 import (
-	"log"
+	"log/slog"
 	"os"
 
 	repository "github.com/muhlikus/tgbot/internal/repository/external/telegram"
+	"github.com/muhlikus/tgbot/pkg/logger"
 
+	"github.com/caarlos0/env/v11"
 	"github.com/muhlikus/telegramclient"
 )
 
+const defaultLogFileName = "tgbot.log"
+
 func main() {
-	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
-	if botToken == "" {
-		log.Fatalln("TELEGRAM_BOT_TOKEN environment must be set")
+	var cfg config
+
+	logFilePath := os.Getenv("LOG_PATH")
+	if logFilePath == "" {
+		logFilePath = defaultLogFileName
 	}
 
-	config := &Config{Token: botToken}
+	logger, leveler := logger.NewFileLogger(logFilePath)
+	leveler.Set(slog.LevelDebug)
+	//slog.SetDefault(logger)
 
-	telegramClient, err := telegramclient.New(telegramclient.Config{Token: config.Token})
+	err := env.Parse(&cfg)
 	if err != nil {
-		log.Fatalf("Failed to create telegram client: %v", err)
+		logger.Error("parsing config", slog.Any("error", err))
+		return
+	}
+
+	telegramClient, err := telegramclient.New(cfg.TgClient)
+	if err != nil {
+		logger.Error("creating telegram client", slog.Any("error", err))
+		return
 	}
 
 	rep, err := repository.NewRepository(telegramClient)
 	if err != nil {
-		log.Fatalf("Failed to create repository: %v", err)
+		logger.Error("creating repository", slog.Any("error", err))
+		return
 	}
 	_ = rep
 }

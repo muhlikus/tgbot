@@ -1,5 +1,7 @@
 package main
 
-type Config struct {
-	Token string
+import "github.com/muhlikus/telegramclient"
+
+type config struct {
+	TgClient telegramclient.Config
 }
