@@ -2,20 +2,25 @@ package logger
 
 import (
 	"io"
+	"log"
 	"log/slog"
 	"os"
 )
 
-func NewFileLogger(filePath string) (*slog.Logger, *slog.LevelVar) {
+func NewFileLogger() (*slog.Logger, *slog.LevelVar) {
+	var writer io.Writer
 
-	var logWriter io.Writer
-
-	logWriter, err := os.Create(filePath)
-	if err != nil {
-		logWriter = os.Stdout
+	filePath := os.Getenv("LOG_PATH")
+	if filePath == "" {
+		log.Fatal("Environment LOG_PATH must be set")
 	}
 
-	logLeveler := &slog.LevelVar{}
-	logHandler := slog.NewTextHandler(logWriter, &slog.HandlerOptions{Level: logLeveler})
-	return slog.New(logHandler), logLeveler
+	writer, err := os.Create(filePath)
+	if err != nil {
+		writer = os.Stdout
+	}
+
+	leveler := &slog.LevelVar{}
+	handler := slog.NewJSONHandler(writer, &slog.HandlerOptions{Level: leveler})
+	return slog.New(handler), leveler
 }

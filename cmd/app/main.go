@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"log/slog"
 	"os"
 
@@ -16,19 +17,18 @@ const defaultLogFileName = "tgbot.log"
 func main() {
 	var cfg config
 
-	logFilePath := os.Getenv("LOG_PATH")
-	if logFilePath == "" {
-		logFilePath = defaultLogFileName
+	err := env.Parse(&cfg)
+	if err != nil {
+		log.Fatalf("failed to create repository %v", err)
 	}
 
-	logger, leveler := logger.NewFileLogger(logFilePath)
+	logger, leveler := logger.NewFileLogger()
 	leveler.Set(slog.LevelDebug)
 	//slog.SetDefault(logger)
 
-	err := env.Parse(&cfg)
-	if err != nil {
-		logger.Error("parsing config", slog.Any("error", err))
-		return
+	_, cfg.debug = os.LookupEnv("DEBUG")
+	if cfg.debug {
+		leveler.Set(slog.LevelDebug)
 	}
 
 	telegramClient, err := telegramclient.New(cfg.TgClient)

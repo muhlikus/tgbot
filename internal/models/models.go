@@ -4,8 +4,8 @@ type Message struct {
 	MessageId int
 	Date      int
 	Text      string
-	Chat      Chat
-	Document  Document
+	Chat      *Chat
+	Document  *Document
 }
 
 type Chat struct {
