@@ -12,8 +12,6 @@ import (
 	"github.com/muhlikus/telegramclient"
 )
 
-const defaultLogFileName = "tgbot.log"
-
 func main() {
 	var cfg config
 
