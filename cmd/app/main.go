@@ -19,7 +19,7 @@ func main() {
 
 	err := env.Parse(&cfg)
 	if err != nil {
-		log.Fatalf("failed to create repository %v", err)
+		log.Fatalf("failed to parse config %v", err)
 	}
 
 	logger, leveler := logger.NewFileLogger()
@@ -33,13 +33,13 @@ func main() {
 
 	telegramClient, err := telegramclient.New(cfg.TgClient)
 	if err != nil {
-		logger.Error("creating telegram client", slog.Any("error", err))
+		logger.Error("failed to create telegram client", slog.Any("error", err))
 		return
 	}
 
 	rep, err := repository.NewRepository(telegramClient)
 	if err != nil {
-		logger.Error("creating repository", slog.Any("error", err))
+		logger.Error("failed to create repository", slog.Any("error", err))
 		return
 	}
 	_ = rep
