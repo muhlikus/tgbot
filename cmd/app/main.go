@@ -6,6 +6,7 @@ import (
 	"os"
 
 	repository "github.com/muhlikus/tgbot/internal/repository/external/telegram"
+	"github.com/muhlikus/tgbot/internal/service"
 	"github.com/muhlikus/tgbot/pkg/logger"
 
 	"github.com/caarlos0/env/v11"
@@ -40,5 +41,11 @@ func main() {
 		logger.Error("failed to create repository", slog.Any("error", err))
 		return
 	}
-	_ = rep
+
+	service, err := service.NewService(rep)
+	if err != nil {
+		logger.Error("failed to create service", slog.Any("error", err))
+		return
+	}
+	_ = service
 }

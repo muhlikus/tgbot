@@ -4,6 +4,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/muhlikus/telegramclient v0.0.0-20250416133821-65d7a01290fc h1:S08HAioE6qaTHtGugKi20xCUPxTV+VY4YIxZm8cuVzQ=
 github.com/muhlikus/telegramclient v0.0.0-20250416133821-65d7a01290fc/go.mod h1:rSvzq5ibElvnm2zyXqmf14mN1gje1jQvgPWjX6U2HL8=
+github.com/muhlikus/telegramclient v0.0.0-20250420114635-460c55a120a0 h1:jkqR60oHNqmLV/XUSyUoxJV1FVwdJ6rrloL714iMSlw=
+github.com/muhlikus/telegramclient v0.0.0-20250420114635-460c55a120a0/go.mod h1:rSvzq5ibElvnm2zyXqmf14mN1gje1jQvgPWjX6U2HL8=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=

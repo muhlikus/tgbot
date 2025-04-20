@@ -1,11 +1,19 @@
 package models
 
+const (
+	TextMessage = iota
+	FileMessage
+)
+
+type messageType int
+
 type Message struct {
-	MessageId int
-	Date      int
-	Text      string
-	Chat      *Chat
-	Document  *Document
+	Id     int
+	Type   messageType
+	Date   int
+	Text   string
+	ChatID int
+	File   *File
 }
 
 type Chat struct {
@@ -13,10 +21,10 @@ type Chat struct {
 	Type string
 }
 
-type Document struct {
-	FileID       string
-	FileUniqueID string
-	FileSize     int
-	FileName     string
-	MimeType     string
+type File struct {
+	ID       string
+	UniqueID string
+	Size     int
+	Name     string
+	MimeType string
 }
