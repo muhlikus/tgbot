@@ -6,6 +6,7 @@ import (
 	"github.com/muhlikus/telegramclient"
 )
 
+//go:generate mockgen -source=interfaces.go -destination=./mock/interfaces.go -package=mock
 type telegramClient interface {
 	GetUpdates() ([]telegramclient.Update, error)
 	SendMessage(chatID int, text string) (*telegramclient.Message, error)
